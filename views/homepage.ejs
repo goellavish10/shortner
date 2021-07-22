@@ -1,0 +1,43 @@
+<!-- <div class="row"> -->
+<div class="input-link" style="margin-top: 20vh">
+  <h2>Shrink the Url</h2>
+  <form action="/" method="POST">
+    <div class="my-4 form-inline">
+      <label for="exampleInputPassword1">Paste The Url</label>
+      <input
+        required
+        type="text"
+        class="form-control col mr-2"
+        id="exampleInputPassword1"
+        placeholder="Link"
+        name="longUrl"
+        autocomplete="off"
+      />
+    </div>
+    <button type="submit" class="btn btn-success">Tiny</button>
+  </form>
+</div>
+<% if(messages.success && messages.code) {%>
+<div
+  class="alert alert-dark link-alert"
+  role="alert"
+  style="margin-top: 50px; text-align: center"
+>
+  <span><%- messages.success %></span>
+  <!-- <span><%- messages.code %></span> -->
+  <button onclick="copyText('<%= messages.code %>')">
+    <i class="far fa-clipboard"></i>
+  </button>
+</div>
+
+<% } %> <% if(messages.error) {%>
+<div
+  class="alert alert-danger link-alert"
+  role="alert"
+  style="margin-top: 50px; text-align: center"
+>
+  <span><%= messages.error; %></span>
+</div>
+
+<% } %>
+<!-- </div> -->

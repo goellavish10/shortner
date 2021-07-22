@@ -1,0 +1,119 @@
+<div class="row">
+  <% if(messages.user) {%>
+  <div
+    class="alert alert-danger link-alert temp-div"
+    role="alert"
+    style="margin-top: 50px; text-align: center"
+  >
+    <span><%= messages.user; %></span>
+  </div>
+
+  <% } %>
+  <h1 class="welcome-title">Welcome <%= userName %></h1>
+
+  <div class="input-link">
+    <h2>Shrink the Url</h2>
+    <form action="/dashboard" method="POST">
+      <div class="my-2 form-inline">
+        <label for="exampleInputPassword1"
+          >Paste The Url<span style="color: red">*</span></label
+        >
+        <input
+          required
+          type="text"
+          class="form-control col mr-2"
+          id="exampleInputPassword1"
+          placeholder="Link"
+          name="longUrl"
+        />
+      </div>
+      <div class="my-2 form-inline">
+        <label for="exampleInputPassword1">Type in your custom url name </label>
+        <input
+          type="text"
+          class="form-control col mr-2"
+          id="exampleInputPassword1"
+          placeholder="Custom URL Name"
+          name="customName"
+        />
+        <div class="alert alert-primary" role="alert" style="padding: 4px">
+          Do not use spaces in custom url name. Only urls with custom url name
+          will be stored in database
+        </div>
+      </div>
+      <div class="my-2 form-inline">
+        <label for="exampleInputPassword1"
+          >Name<span style="color: red">*</span></label
+        >
+        <input
+          required
+          type="text"
+          class="form-control col mr-2"
+          id="exampleInputPassword1"
+          placeholder="Name of Link"
+          name="title"
+        />
+      </div>
+      <button type="submit" class="btn btn-success">Tiny</button>
+    </form>
+    <% if(messages.success && messages.code) {%>
+    <div
+      class="alert alert-dark link-alert"
+      role="alert"
+      style="margin-top: 50px; text-align: center"
+    >
+      <span><%- messages.success %></span>
+      <button onclick="copyText('<%= messages.code %>')">
+        <i class="far fa-clipboard hide-after"></i>
+      </button>
+    </div>
+
+    <% } %> <% if(messages.error) {%>
+    <div
+      class="alert alert-danger link-alert"
+      role="alert"
+      style="margin-top: 50px; text-align: center"
+    >
+      <span><%= messages.error; %></span>
+    </div>
+
+    <% } %>
+    <% if(messages.delete) {%>
+      <div
+        class="alert alert-dark link-alert temp-div"
+        role="alert"
+        style="margin-top: 50px; text-align: center"
+      >
+        <span><%- messages.delete %></span>
+      </div>
+  
+      <% } %>
+  </div>
+  <table class="table" style="margin-top: 50px">
+    <thead>
+      <tr style="text-align: center">
+        <th scope="col">Name</th>
+        <th scope="col">Link</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% urls.forEach((element) => { %>
+      <tr style="text-align: center">
+        
+        <td><%= element.name %></td>
+        <td style="display: flex;justify-content: space-evenly;" class="td-bin"><a href=<%= `http://localhost:3000/r/${element.shortUrl}` %> target="_blank"><%= `http://localhost:3000/r/${element.shortUrl}` %></a> <a href=<%= `/dashboard/delete/${element._id}` %> class="btn red" style="padding: 0;">
+          <i class="fas fa-trash-alt"></i>
+        </a>
+          <!-- <form action=<%=`/dashboard/${element.shortUrl}`%> method="POST">
+          <input type="hidden" name="_method" value="DELETE" />
+          <button type="submit" class="btn red" style="padding: 0;">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </form> -->
+       </td>
+        
+      </tr>
+      <% }); %> 
+    </tbody>
+  </table>
+</div>
